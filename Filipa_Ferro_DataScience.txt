@@ -1,0 +1,33 @@
+#The original data was extracted from the website https://www.fpatletismo.pt/
+#Every year in Portugal in the middle of January there is the National Athletics Championships.
+#This event obey to the IAAF (International Association of Athletics Federations) rules, and until now, there's any 
+#study about the results or even about the increase of participants on this type of Champioship.
+#This work is a high level, because I'm interested in continue to anayse those data.   
+
+library(readxl)
+#Getting all the results from all 5 years
+TotalResultNacionalChamp <- read_excel("C:/Documentos/CursoDataScience/DadosFPA/TotalResultNacionalChamp.xlsx")
+View(TotalResultNacionalChamp)
+#Count the number of participations per year
+counts<-table(TotalResultNacionalChamp$Year, dnn = "Year")
+barplot(counts,
+main = "Number of Participants per Year",
+ylab = "# Participants per Year",
+xlab = "Year",
+names.arg = c("2014", "2015", "2016", "2017", "2018"),
+col = "darkred",
+horiz = FALSE)
+#Count the number Participants per Year and Running Category
+countsRC<-with(TotalResultNacionalChamp, table(Year, RunningCategory, dnn = c("Year","RunningCategory")))
+View(countsRC)
+barplot(countsRC,
+main = "Number of Participants per Year",
+xlab = "Running Category",
+names.arg =c("Senior Masc","Senior Fem", "Junior Masc","Junior Fem","Veterano Masc","Veterano Fem"),
+ylab = "# Participants",
+col = c("red","green","yellow","grey","blue"),
+horiz = FALSE)
+legend("topleft",
+c("2014", "2015", "2016", "2017", "2018"),
+fill = c("red","green","yellow","grey","blue")
+)
